@@ -1,0 +1,17 @@
+;
+; BIND data file for hopesanddreamschildcare.ca
+;
+@       IN      SOA     ns1.hopesanddreamschildcare.ca. root.hopesanddreamschildcare.ca. (
+									  2         ; Serial
+								  1200         ; Refresh
+								   180         ; Retry
+							  2419200         ; Expire
+								  1200 )       ; Default TTL
+
+@		IN		NS		ns1.hopesanddreamschildcare.ca.
+@		IN		NS		ns2.hopesanddreamschildcare.ca.
+@		IN		MX	10	mail.hopesanddreamschildcare.ca.
+@	IN	A	174.137.52.197
+ns1	IN	A	174.137.52.197
+ns2	IN A	174.137.52.206
+*	IN	CNAME hopesanddreamschildcare.ca.

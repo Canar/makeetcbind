@@ -1,0 +1,15 @@
+;
+; BIND data file for ennorath.ca
+;
+@       IN      SOA		ns1.baryon.ca. ennorath-ca.ennorath.ca. (
+									 27         ; Serial
+								  3600         ; Refresh
+								  1800         ; Retry
+							    86400         ; Expire
+								  1200 )       ; Default TTL
+
+@		IN		NS		ns1.baryon.ca.
+@		IN		NS		ns2.baryon.ca.
+@	IN	A 174.37.137.139
+bree IN A 173.192.138.38
+*		IN		CNAME	ennorath.ca.

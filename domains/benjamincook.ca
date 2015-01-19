@@ -1,0 +1,20 @@
+;
+; BIND data file for benjamincook.ca
+;
+@       IN      SOA     ns1.baryon.ca. root.benjamincook.ca. (
+									 12         ; Serial
+								  1200         ; Refresh
+								   180         ; Retry
+							  2419200         ; Expire
+								  1200 )       ; Default TTL
+
+@		IN		NS		ns1.baryon.ca.
+@		IN		NS		ns2.baryon.ca.
+@		IN		MX	10	mail
+ns1	IN	A	174.137.52.197
+ns2	IN	A	174.137.52.206
+mail  IN A  174.37.137.139
+@  IN A  174.37.137.139
+*	IN	CNAME benjamincook.ca.
+benjamincook.ca. IN	TXT "v=spf1 a mx -all"
+benjamincook.ca. IN	SPF "v=spf1 a mx -all"
