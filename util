@@ -1,4 +1,50 @@
 #!/usr/bin/env bash
+build-domain(){ #Serial,IP,Domain
+	N=$3
+	D=${N}.
+	F=domains/$N
+	SOA="1200 180 2419200 1200" # Refresh,Retry,Expire,TTL
 
+	echo "@ IN SOA		$D	${D}benjamincook.ca. ( $1 $SOA )" >$F
+	echo "* IN CNAME	$D" >>$F
+	echo "@ IN MX	10	$D" >>$F
+	echo "@ IN NS		$D" >>$F
+	echo "@ IN NS		bed.ac." >>$F
+	echo "@ IN A		$2" >>$F
+}
+build-domain-spf(){
+	D=${N}.
+	F=domains/$N
+	build-domain $1 $2 $3
+	echo "$D IN TXT \"v=spf1 a mx -all\"" >>$F
+	echo "$D IN SPF \"v=spf1 a mx -all\"" >>$F
+}
+build-domains(){
+	MITHLOND=142.4.212.110
+	MITHLONDA=192.50.242.72
+	MITHLONDB=192.50.242.73
+	MITHLONDC=192.50.242.74
+	MITHLONDD=192.50.242.75
+	ANNUMINAS=174.37.137.139
+	MENEGROTH=174.137.52.197
+	OSGILIATH=94.242.209.186
+	GONDOLIN=70.77.240.33
+	build-domain 		12	$MITHLOND	bed.ac
+	build-domain 		3	$MITHLOND	blaze.im
+	build-domain 		3	$MITHLOND	baryon.it
+	build-domain 		2	$MITHLOND	cuntoso.com
+	build-domain-spf	12 $MITHLOND	cupe399.ca
+	build-domain 		4	$MITHLONDA	pgbass.com
+	build-domain 		4	$MITHLONDB	ennorath.ca
+	build-domain 		1	$MITHLONDC	hotin.pink
+	build-domain 		13	$MITHLONDD	per.ninja	
+	build-domain		7	$MENEGROTH	psylight.ca	
+	build-domain		10	$MENEGROTH	baryon.ca
+	build-domain		2	$MENEGROTH	fb2k.net
+	build-domain		3	$MENEGROTH	hopesanddreamschildcare.ca
+	build-domain-spf	4	$ANNUMINAS	thegreenplace.ca	
+	build-domain-spf	13	$ANNUMINAS	benjamincook.ca
+	build-domain		1	$GONDOLIN	anaphor.net
+	build-domain		1	$OSGILIATH	canar.moe	
+}
 eval "$@"
-
