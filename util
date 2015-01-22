@@ -27,17 +27,25 @@ build-subdomain(){
 	fi
 }
 build-domains(){
+	ANNUMINAS=142.91.92.200
+	EDHELLOND=174.37.137.139
+	GONDOLIN=70.77.240.33
 	MITHLOND=142.4.212.110
+	MENEGROTH=174.137.52.197
+	OSGILIATH=94.242.209.186
+
 	MITHLONDA=192.50.242.72
 	MITHLONDB=192.50.242.73
 	MITHLONDC=192.50.242.74
 	MITHLONDD=192.50.242.75
-	ANNUMINAS=174.37.137.139
-	MENEGROTH=174.137.52.197
-	OSGILIATH=94.242.209.186
-	GONDOLIN=70.77.240.33
 	mkdir -p domains
-	build-domain v	5	$MITHLONDB	ennorath.ca $MITHLOND mithlond $MENEGROTH menegroth $ANNUMINAS annuminas $GONDOLIN gondolin $OSGILIATH osgiliath
+	build-domain v	6	$MITHLONDB	ennorath.ca \
+		$ANNUMINAS annuminas \
+		$EDHELLOND edhellond \
+		$GONDOLIN gondolin \
+		$MITHLOND mithlond \
+		$MENEGROTH menegroth \
+		$OSGILIATH osgiliath
 	build-domain -	12	$MITHLOND	bed.ac
 	build-domain -	3	$MITHLOND	blaze.im
 	build-domain -	3	$MITHLOND	baryon.it
@@ -50,9 +58,27 @@ build-domains(){
 	build-domain -	10	$MENEGROTH	baryon.ca
 	build-domain -	2	$MENEGROTH	fb2k.net
 	build-domain -	3	$MENEGROTH	hopesanddreamschildcare.ca
-	build-domain m	4	$ANNUMINAS	thegreenplace.ca	
-	build-domain m	13	$ANNUMINAS	benjamincook.ca
+	build-domain m	4	$EDHELLOND	thegreenplace.ca	
+	build-domain m	13	$EDHELLOND	benjamincook.ca
 	build-domain -	1	$GONDOLIN	anaphor.net
-	build-domain -	1	$OSGILIATH	canar.moe	
+	build-domain -	2	$ANNUMINAS	canar.moe	
+	build-domain -	1	$ANNUMINAS	grimory.com
+	build-domain -	1	$OSGILIATH	protoni.ca
+}
+make-conf(){
+	for f in $(ls -1 domains) ; do
+		echo-zone $f
+	done > bind.conf.zones
+}
+echo-zone(){
+	echo "zone \"$1\" {"
+	echo "	type master;"
+	echo "	file \"/etc/bind/domains/$1\"\;"
+	echo "};"
+}
+refresh(){
+	build-domains
+	make-conf
+	/etc/init.d/bind9 reload
 }
 eval "$@"
