@@ -5,7 +5,7 @@ build-domain(){ #Serial,IP,Domain
 	F=domains/$N
 	SOA="1200 180 2419200 1200" # Refresh,Retry,Expire,TTL
 
-	echo "@ IN SOA		$D	${D}benjamincook.ca. ( $1 $SOA )" >$F
+	echo "@ IN SOA	$D ${D}benjamincook.ca. ( $1 $SOA )" >$F
 	echo "* IN CNAME	$D" >>$F
 	echo "@ IN MX	10	$D" >>$F
 	echo "@ IN NS		$D" >>$F
@@ -19,6 +19,16 @@ build-domain-spf(){
 	echo "$D IN TXT \"v=spf1 a mx -all\"" >>$F
 	echo "$D IN SPF \"v=spf1 a mx -all\"" >>$F
 }
+build-domain-sub(){
+	build-domain "$@"
+	build-subdomain "${@:4}"
+}
+build-subdomain(){
+	if [[ -n $1 && -n $2 ]] ; then
+		echo "$2	IN A	$1" >>$F
+		build-subdomain "${@:3}"
+	fi
+}
 build-domains(){
 	MITHLOND=142.4.212.110
 	MITHLONDA=192.50.242.72
@@ -29,13 +39,13 @@ build-domains(){
 	MENEGROTH=174.137.52.197
 	OSGILIATH=94.242.209.186
 	GONDOLIN=70.77.240.33
+	build-domain-sub	5	$MITHLONDB	ennorath.ca $MITHLOND mithlond $MENEGROTH menegroth $ANNUMINAS annuminas $GONDOLIN gondolin $OSGILIATH osgiliath
 	build-domain 		12	$MITHLOND	bed.ac
 	build-domain 		3	$MITHLOND	blaze.im
 	build-domain 		3	$MITHLOND	baryon.it
 	build-domain 		2	$MITHLOND	cuntoso.com
 	build-domain-spf	12 $MITHLOND	cupe399.ca
 	build-domain 		4	$MITHLONDA	pgbass.com
-	build-domain 		4	$MITHLONDB	ennorath.ca
 	build-domain 		1	$MITHLONDC	hotin.pink
 	build-domain 		13	$MITHLONDD	per.ninja	
 	build-domain		7	$MENEGROTH	psylight.ca	
