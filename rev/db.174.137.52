@@ -1,0 +1,15 @@
+;
+; BIND data file for benjamincook.ca
+;
+@       IN      SOA     ns1.baryon.ca. root.baryon.ca. (
+									  6         ; Serial
+								  1200         ; Refresh
+								   180         ; Retry
+							  2419200         ; Expire
+								  1200 )       ; Default TTL
+
+52.137.174.in-addr.arpa. IN NS		ns1.baryon.ca.
+52.137.174.in-addr.arpa. IN NS		ns2.baryon.ca.
+
+197 IN  PTR	baryon.ca.
+206 IN  PTR	alt.baryon.ca.

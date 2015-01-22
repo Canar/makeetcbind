@@ -1,0 +1,11 @@
+@       IN      SOA     ns1.baryon.ca. root.baryon.ca. (
+									  7         ; Serial
+								  1200         ; Refresh
+								   180         ; Retry
+							  2419200         ; Expire
+								  1200 )       ; Default TTL
+
+	76.244.216.in-addr.arpa. IN NS		ns1.baryon.ca.
+	76.244.216.in-addr.arpa. IN NS		ns2.baryon.ca.
+
+32	PTR	benjamincook.ca.

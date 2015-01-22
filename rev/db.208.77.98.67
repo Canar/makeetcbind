@@ -1,0 +1,13 @@
+;
+; BIND data file for benjamincook.ca
+;
+@       IN      SOA     ns1.baryon.ca. psylight-ca.benjamincook.ca. (
+									  7         ; Serial
+								  1200         ; Refresh
+								   180         ; Retry
+							  2419200         ; Expire
+								  1200 )       ; Default TTL
+
+67.98.77.208.in-addr.arpa. IN NS		ns1.baryon.ca.
+67.98.77.208.in-addr.arpa. IN NS		ns2.baryon.ca.
+67 IN  PTR	psylight.ca.
