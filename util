@@ -50,7 +50,7 @@ build-domains(){
 	build-domain -	3	$MITHLOND	blaze.im
 	build-domain -	3	$MITHLOND	baryon.it
 	build-domain -	2	$MITHLOND	cuntoso.com
-	build-domain -	12 $MITHLOND	cupe399.ca
+	build-domain -	12	$MITHLOND	cupe399.ca
 	build-domain -	4	$MITHLONDA	pgbass.com
 	build-domain -	1	$MITHLONDC	hotin.pink
 	build-domain - 13	$MITHLONDD	per.ninja	
